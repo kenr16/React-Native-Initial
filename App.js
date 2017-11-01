@@ -1,30 +1,50 @@
 import React, { Component } from 'react';
-import { AppRegistry, Image, Text, View, StyleSheet } from 'react-native';
+import { AppRegistry, Image, Text, TextInput, View, StyleSheet } from 'react-native';
 // ****************************
 
+export default class PizzaTranslator extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {text: ''};
+  }
 
-
-
-// ****************************
-
-export default class FlexDirectionsBasics extends Component {
   render() {
     return (
-      // justifyContent 'flex-start', 'center', 'flex-end', 'space-around', 'space-between'
-      // alignItems 'flex-start', 'center', 'flex-end', 'stretch'
-      <View style={{
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
-        <View style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />
-        <View style={{width: 50, height: 50, backgroundColor: 'skyblue'}} />
-        <View style={{width: 50, height: 50, backgroundColor: 'steelblue'}} />
+      <View style={{padding: 10, marginTop: 100}}>
+        <TextInput
+          style={{height: 40}}
+          placeholder="Type here to translate!"
+          onChangeText={(text) => this.setState({text})}
+        />
+        <Text style={{padding: 10, fontSize: 42}}>
+          {this.state.text.split(' ').map((word) => word && '🍕').join(' ')}
+        </Text>
       </View>
     );
   }
-};
+}
+
+
+// ****************************
+
+// export default class FlexDirectionsBasics extends Component {
+//   render() {
+//     return (
+//       // justifyContent 'flex-start', 'center', 'flex-end', 'space-around', 'space-between'
+//       // alignItems 'flex-start', 'center', 'flex-end', 'stretch'
+//       <View style={{
+//         flex: 1,
+//         flexDirection: 'column',
+//         justifyContent: 'space-between',
+//         alignItems: 'center'
+//       }}>
+//         <View style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />
+//         <View style={{width: 50, height: 50, backgroundColor: 'skyblue'}} />
+//         <View style={{width: 50, height: 50, backgroundColor: 'steelblue'}} />
+//       </View>
+//     );
+//   }
+// };
 
 // ****************************
 // class Greeting extends Component {
