@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Image, ListView, Text, StyleSheet, ScrollView, View } from 'react-native';
+import { ActivityIndicator, FlatList, Image, ListView, StyleSheet, ScrollView, Text, View } from 'react-native';
 import AppNavigation from './Navigation.js';
 
 class Tile extends Component {
@@ -46,11 +46,18 @@ export default class TileScreen extends Component {
       );
     }
 
-    let itemsArray = [];
-    itemsArray.push(this.state.dataSource[0]);
-
     return (
       <View style={{flex: 1, paddingTop: 40}}>
+      <FlatList
+        data={this.state.dataSource}
+        renderItem={ ({item}) =>
+          <View>
+          <Text>{item.name}</Text>
+          <Image source={item.url} style={{ width: 150, height: 150}}/>
+          </View>
+
+        }
+      />
       <AppNavigation />
       {/*
         <Text>This is a test: {this.state.dataSource[0].name}, {this.state.dataSource[0].url}
