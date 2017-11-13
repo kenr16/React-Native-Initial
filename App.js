@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Image, ListView, Text, View } from 'react-native';
+import { ActivityIndicator, Image, ListView, Text, StyleSheet, ScrollView, View } from 'react-native';
 
 
 
@@ -7,8 +7,8 @@ class Tile extends Component {
   render() {
     return (
       <View>
+        <Image source={{ uri: this.props.pic }} style={{width: 150, height: 150}}/>
         <Text>{this.props.name}!</Text>
-        <Image source={{ uri: this.props.pic }} style={{width: 200, height: 150}}/>
       </View>
     );
   }
@@ -27,6 +27,7 @@ export default class LotsOfTiles extends Component {
     return fetch('https://clothing-api.herokuapp.com/items')
     .then((response) => response.json())
     .then((responseJson) => {
+      console.log(jsonData);
       this.setState({
         isLoading: false,
         dataSource: responseJson,
@@ -46,17 +47,24 @@ export default class LotsOfTiles extends Component {
       );
     }
 
+    let itemsArray = [];
+    itemsArray.push(this.state.dataSource[0]);
+
     return (
       <View style={{flex: 1, paddingTop: 40}}>
-        <Text>This is a test.{this.state.dataSource[0].name}, {this.state.dataSource[0].url}</Text>
+      <ScrollView>
+      {/*
+        <Text>This is a test: {this.state.dataSource[0].name}, {this.state.dataSource[0].url}
+        {itemsArray[0].name}
+
+        </Text>
 
         <Text>
         let myTile = {this.state.dataSource}.map((thisItem, i) => (
-          return thisItem.name
+          return thisItem.name;
         ));
         </Text>
 
-        {/*
         {this.state.newData}.map(item) => ()
         <Tile name='1986 Raiders Jacket' pic='http://s7d1.scene7.com/is/image/ShiekhShoes/19-0676.1A?$shiekh_large$'/>
         <Tile name='Pink Sweatervest' pic='https://cdnc.lystit.com/photos/2013/02/20/brooks-brothers-pink-intarsia-sweater-vest-product-1-6567030-719884497.jpeg' />
@@ -84,8 +92,28 @@ export default class LotsOfTiles extends Component {
 
         */}
         <Tile name={this.state.dataSource[0].name} pic={this.state.dataSource[0].url} />
-
+        <Tile name={this.state.dataSource[1].name} pic={this.state.dataSource[1].url} />
+        <Tile name={this.state.dataSource[2].name} pic={this.state.dataSource[2].url} />
+        <Tile name={this.state.dataSource[3].name} pic={this.state.dataSource[3].url} />
+        <Tile name={this.state.dataSource[4].name} pic={this.state.dataSource[4].url} />
+        <Tile name={this.state.dataSource[5].name} pic={this.state.dataSource[5].url} />
+        <Tile name={this.state.dataSource[6].name} pic={this.state.dataSource[6].url} />
+        <Tile name={this.state.dataSource[7].name} pic={this.state.dataSource[7].url} />
+      </ScrollView>
       </View>
     );
   }
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 22
+  },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
+})
