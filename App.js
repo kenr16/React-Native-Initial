@@ -27,14 +27,11 @@ export default class LotsOfTiles extends Component {
     return fetch('https://clothing-api.herokuapp.com/items')
     .then((response) => response.json())
     .then((responseJson) => {
-      let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 });
       this.setState({
         isLoading: false,
-        dataSource: ds.cloneWithRows(responseJson),
-        newData: responseJson,
-      }, function() {
-        // do something with new state
+        dataSource: responseJson,
       });
+      return responseJson;
     })
     .catch((error) => {
       console.error(error);
@@ -51,10 +48,16 @@ export default class LotsOfTiles extends Component {
 
     return (
       <View style={{flex: 1, paddingTop: 40}}>
-        <Text>This is a test.</Text>
+        <Text>This is a test.{this.state.dataSource[0].name}, {this.state.dataSource[0].url}</Text>
 
-        {this.state.newData}.map(item) => ()
+        <Text>
+        let myTile = {this.state.dataSource}.map((thisItem, i) => (
+          return thisItem.name
+        ));
+        </Text>
+
         {/*
+        {this.state.newData}.map(item) => ()
         <Tile name='1986 Raiders Jacket' pic='http://s7d1.scene7.com/is/image/ShiekhShoes/19-0676.1A?$shiekh_large$'/>
         <Tile name='Pink Sweatervest' pic='https://cdnc.lystit.com/photos/2013/02/20/brooks-brothers-pink-intarsia-sweater-vest-product-1-6567030-719884497.jpeg' />
         <Tile name='Rainbow Leggings' pic='https://rlv.zcache.com/rainbow_flag_leggings-r55446fff4e70446fb3bca6fbcf838ebb_68vic_324.jpg?rlvnet=1' />
@@ -80,6 +83,7 @@ export default class LotsOfTiles extends Component {
         }
 
         */}
+        <Tile name={this.state.dataSource[0].name} pic={this.state.dataSource[0].url} />
 
       </View>
     );
