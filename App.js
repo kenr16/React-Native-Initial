@@ -31,6 +31,7 @@ export default class LotsOfTiles extends Component {
       this.setState({
         isLoading: false,
         dataSource: ds.cloneWithRows(responseJson),
+        newData: responseJson,
       }, function() {
         // do something with new state
       });
@@ -50,7 +51,9 @@ export default class LotsOfTiles extends Component {
 
     return (
       <View style={{flex: 1, paddingTop: 40}}>
-        <Text>This is a test</Text>
+        <Text>This is a test.</Text>
+
+        {this.state.newData}.map(item) => ()
         {/*
         <Tile name='1986 Raiders Jacket' pic='http://s7d1.scene7.com/is/image/ShiekhShoes/19-0676.1A?$shiekh_large$'/>
         <Tile name='Pink Sweatervest' pic='https://cdnc.lystit.com/photos/2013/02/20/brooks-brothers-pink-intarsia-sweater-vest-product-1-6567030-719884497.jpeg' />
@@ -61,11 +64,23 @@ export default class LotsOfTiles extends Component {
 
         {/*
         <Tile dataSource={this.state.dataSource} pic={this.state.dataSource.url} name={this.state.dataSource.name} />
-        */}
         <ListView
           dataSource={this.state.dataSource}
           renderRow={(rowData) => <Text>{rowData.name}, {rowData.url}</Text>}
         />
+
+        {
+           this.state.dataSource.map((item) => (
+              <TouchableOpacity key = {item.name}>
+                 <Text>
+                    {item.url}
+                 </Text>
+              </TouchableOpacity>
+           ))
+        }
+
+        */}
+
       </View>
     );
   }
