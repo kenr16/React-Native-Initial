@@ -27,6 +27,7 @@ export default class TileScreen extends Component {
     .then((response) => response.json())
     .then((responseJson) => {
       console.log(responseJson);
+      console.log(typeof(responseJson));
       this.setState({
         isLoading: false,
         dataSource: responseJson,
@@ -106,6 +107,7 @@ export default class TileScreen extends Component {
         <Tile name={this.state.dataSource[6].name} pic={this.state.dataSource[6].url} />
         <Tile name={this.state.dataSource[7].name} pic={this.state.dataSource[7].url} />
       </View>
+      //This will need to be improved with the use of flexbox and further styling.
     );
   }
 }
